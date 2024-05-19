@@ -11,4 +11,14 @@ class CategoryRepository
     {
         Category::create($categoryDTO->toArray());
     }
+
+    public function getCategories()
+    {
+        return Category::all();
+    }
+
+    public function updateCategory(Category $category, CategoryDTO $categoryDTO): void
+    {
+        $category->update($categoryDTO->toArray());
+    }
 }
