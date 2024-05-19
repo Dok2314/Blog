@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Main\BlogController;
 use App\Http\Controllers\Main\AdminController;
+use App\Http\Controllers\Main\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,10 @@ Route::group([], function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index']);
+
+    Route::group(['prefix' => 'categories'], function () {
+        Route::get('/index', [CategoryController::class, 'index'])->name('categories.index');
+    });
 });
 
 Auth::routes();
