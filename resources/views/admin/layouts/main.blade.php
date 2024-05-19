@@ -48,7 +48,14 @@
     <!-- Main Sidebar Container -->
     @include("admin.includes.sidebar")
 
-    @yield('content')
+    <!-- /.content -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        @include('admin.includes.session')
+
+        @yield('content')
+    </div>
+    <!-- /.content-wrapper -->
 
     <footer class="main-footer">
         <strong>BLOG</strong>

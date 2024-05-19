@@ -29,6 +29,8 @@ class CategoryController extends Controller
         try {
             $categoryDTO = new CategoryDTO($request->validated());
             $this->categoryService->store($categoryDTO);
+
+            return redirect()->route('admin.categories.index')->with(['success' => 'Категория успешно создана!']);
         } catch (Exception $exception) {
             return $exception->getMessage();
         }
