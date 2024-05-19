@@ -25,7 +25,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index']);
 
     Route::group(['prefix' => 'categories'], function () {
-        Route::get('/index', [CategoryController::class, 'index'])->name('categories.index');
+        Route::get('/index', [CategoryController::class, 'index'])->name('admin.categories.index');
+
+        Route::get('/create', [CategoryController::class, 'create'])->name('admin.categories.create');
+
+        Route::post('/', [CategoryController::class, 'store'])->name('admin.categories.store');
     });
 });
 
