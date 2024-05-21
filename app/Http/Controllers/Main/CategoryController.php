@@ -74,7 +74,7 @@ class CategoryController extends Controller
     public function delete(Category $category)
     {
         try {
-            $category->delete();
+            $this->categoryService->delete($category);
 
             return redirect()
                 ->route('admin.categories.index')
@@ -87,7 +87,7 @@ class CategoryController extends Controller
     public function restore($categoryId)
     {
         try {
-            Category::withTrashed()->find($categoryId)->restore();
+            $this->categoryService->restore($categoryId);
 
             return redirect()
                 ->route('admin.categories.index')

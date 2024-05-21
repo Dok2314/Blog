@@ -10,6 +10,15 @@
                     </p>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a href="{{ route('admin.tags.index') }}" class="nav-link">
+                    <i class="nav-icon far fa-image"></i>
+                    <p>
+                        Теги
+                    </p>
+                </a>
+            </li>
         </ul>
     </div>
     <!-- /.sidebar -->

@@ -26,4 +26,14 @@ class CategoryRepository
     {
         return Category::onlyTrashed()->get();
     }
+
+    public function deleteCategory(Category $category): void
+    {
+        $category->delete();
+    }
+
+    public function restoreCategory($categoryId): void
+    {
+        Category::withTrashed()->find($categoryId)->restore();
+    }
 }

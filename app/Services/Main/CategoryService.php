@@ -22,6 +22,11 @@ class CategoryService
         return $this->categoryRepository->getCategories();
     }
 
+    public function delete(Category $category): void
+    {
+        $this->categoryRepository->deleteCategory($category);
+    }
+
     public function getDeletedCategories()
     {
         return $this->categoryRepository->getDeletedCategories();
@@ -30,5 +35,10 @@ class CategoryService
     public function update(Category $category, CategoryDTO $categoryDTO): void
     {
         $this->categoryRepository->updateCategory($category, $categoryDTO);
+    }
+
+    public function restore($categoryId): void
+    {
+        $this->categoryRepository->restoreCategory($categoryId);
     }
 }
