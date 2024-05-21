@@ -21,4 +21,9 @@ class CategoryRepository
     {
         $category->update($categoryDTO->toArray());
     }
+
+    public function getDeletedCategories()
+    {
+        return Category::onlyTrashed()->get();
+    }
 }

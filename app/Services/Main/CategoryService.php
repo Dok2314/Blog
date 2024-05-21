@@ -22,6 +22,11 @@ class CategoryService
         return $this->categoryRepository->getCategories();
     }
 
+    public function getDeletedCategories()
+    {
+        return $this->categoryRepository->getDeletedCategories();
+    }
+
     public function update(Category $category, CategoryDTO $categoryDTO): void
     {
         $this->categoryRepository->updateCategory($category, $categoryDTO);

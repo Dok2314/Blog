@@ -22,6 +22,12 @@ class CategoryController extends Controller
         return view('admin.categories.index', compact('categories'));
     }
 
+    public function listOfDeletedCategories()
+    {
+        $categories = $this->categoryService->getDeletedCategories();
+        return view('admin.categories.deleted', compact('categories'));
+    }
+
     public function create()
     {
         return view('admin.categories.create');
@@ -60,6 +66,32 @@ class CategoryController extends Controller
             return redirect()
                 ->route('admin.categories.index')
                 ->with(['success' => 'Категория успешно обновлена!']);
+        } catch (Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+
+    public function delete(Category $category)
+    {
+        try {
+            $category->delete();
+
+            return redirect()
+                ->route('admin.categories.index')
+                ->with(['success' => 'Категория успешно удалена!']);
+        } catch (Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+
+    public function restore($categoryId)
+    {
+        try {
+            Category::withTrashed()->find($categoryId)->restore();
+
+            return redirect()
+                ->route('admin.categories.index')
+                ->with(['success' => 'Категория успешно восстановлена!']);
         } catch (Exception $exception) {
             return $exception->getMessage();
         }

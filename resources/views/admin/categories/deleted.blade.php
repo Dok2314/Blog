@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Категории</h1>
+                    <h1 class="m-0">Удаленные категории</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="col-2">
-                    <a href="{{ route('admin.categories.deleted') }}" class="btn btn-block btn-warning text-black">Удаленные категории</a>
+                    <a href="{{ route('admin.categories.index') }}" class="btn btn-block btn-warning text-black">Вернуться к списку</a>
                 </div>
 
                 <div class="col-12">
@@ -69,12 +69,14 @@
                                                 <td>{{ $category->title }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($category->created_at)->toDateString() }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.categories.show', $category) }}">
-                                                        <i class="far fa-eye"></i>
-                                                    </a>
-                                                    <a href="{{ route('admin.categories.edit', $category) }}" class="text-success">
-                                                        edit
-                                                    </a>
+{{--                                                    <a href="{{ route('admin.categories.show', $category) }}">--}}
+{{--                                                        <i class="far fa-eye"></i>--}}
+{{--                                                    </a>--}}
+
+                                                    <form action="{{ route('admin.categories.restore', $category) }}" method="POST">
+                                                        @csrf
+                                                        <input type="submit" value="Восстановить" class="btn btn-danger">
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach

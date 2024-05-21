@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Категории</h1>
+                    <h1 class="m-0">{{ $category->title }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -43,6 +43,7 @@
                                             <th>ID</th>
                                             <th>Название</th>
                                             <th>Создана</th>
+                                            <th>Действие</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -50,6 +51,17 @@
                                             <td>{{ $category->id }}</td>
                                             <td>{{ $category->title }}</td>
                                             <td>{{ \Carbon\Carbon::parse($category->created_at)->toDateString() }}</td>
+                                            <td>
+                                                <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-success w-25 mb-1">
+                                                    Edit
+                                                </a>
+
+                                                <form action="{{ route('admin.categories.delete', $category) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="submit" value="Delete" class="btn btn-danger w-25">
+                                                </form>
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
