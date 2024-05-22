@@ -6,6 +6,7 @@ use App\Http\Controllers\Main\BlogController;
 use App\Http\Controllers\Main\AdminController;
 use App\Http\Controllers\Main\CategoryController;
 use App\Http\Controllers\Main\TagController;
+use App\Http\Controllers\Main\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,25 @@ Route::group(['prefix' => 'admin'], function () {
             Route::delete('/', [TagController::class, 'delete'])->name('admin.tags.delete');
 
             Route::post('/', [TagController::class, 'restore'])->name('admin.tags.restore');
+        });
+    });
+
+    Route::group(['prefix' => 'posts'], function () {
+        Route::get('/index', [PostController::class, 'index'])->name('admin.posts.index');
+        Route::get('/deleted/posts', [PostController::class, 'listOfDeletedPosts'])->name('admin.posts.deleted');
+        Route::get('/create', [PostController::class, 'create'])->name('admin.posts.create');
+
+        Route::post('/', [PostController::class, 'store'])->name('admin.posts.store');
+
+        Route::group(['prefix' => '{post}'], function () {
+            Route::get('/', [PostController::class, 'show'])->name('admin.posts.show');
+            Route::get('/edit', [PostController::class, 'edit'])->name('admin.posts.edit');
+
+            Route::put('/', [PostController::class, 'update'])->name('admin.posts.update');
+
+            Route::delete('/', [PostController::class, 'delete'])->name('admin.posts.delete');
+
+            Route::post('/', [PostController::class, 'restore'])->name('admin.posts.restore');
         });
     });
 });
