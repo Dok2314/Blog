@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Services\Main\CategoryService;
 use App\Services\Main\PostService;
 use Exception;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {

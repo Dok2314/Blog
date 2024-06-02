@@ -25,12 +25,12 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-12">
-                    <form action="{{ route('admin.posts.store') }}" class="col-12" method="POST">
+                    <form action="{{ route('admin.posts.store') }}" class="col-12" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="title">Название</label>
-                                <input type="text" class="form-control" id="title" placeholder="Название поста..." name="title">
+                                <input type="text" class="form-control" id="title" placeholder="Название поста..." name="title" value="{{ old('title') }}">
                                 @error('title')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -55,8 +55,36 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="preview_image">Изображение поста(preview)</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="preview_image" name="preview_image">
+                                        <label class="custom-file-label" for="preview_image">Выберите файл</label>
+                                    </div>
+                                </div>
+                                @error('preview_image')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="main_image">Изображение поста(main)</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="main_image" name="main_image">
+                                    <label class="custom-file-label" for="main_image">Выберите файл</label>
+                                </div>
+                                @error('main_image')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
                                 <label for="summernote">Контент</label>
-                                <textarea id="summernote" name="content"></textarea>
+                                <textarea id="summernote" name="content">{{ old('content') }}</textarea>
                                 @error('content')
                                     <div class="text-danger">
                                         {{ $message }}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Main;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostStoreRequest extends FormRequest
@@ -17,13 +18,15 @@ class PostStoreRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
             'title' => ['required'],
             'content' => ['required', 'min:3'],
+            'preview_image' => ['nullable', 'file'],
+            'main_image' => ['nullable', 'file'],
             'category_id' => ['required', 'exists:categories,id', 'integer']
         ];
     }

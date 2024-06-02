@@ -30,7 +30,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="title">Название</label>
-                                <input type="text" class="form-control" id="title" placeholder="Название тега..." name="title">
+                                <input type="text" class="form-control" id="title" placeholder="Название тега..." name="title" value="{{ old('title') }}">
                             </div>
 
                             @error('title')

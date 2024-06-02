@@ -57,6 +57,7 @@
                                         <thead>
                                         <tr>
                                             <th>ID</th>
+                                            <th>Изображение</th>
                                             <th>Название</th>
                                             <th>Контент</th>
                                             <th>Категория</th>
@@ -68,6 +69,13 @@
                                         @foreach($posts as $post)
                                             <tr>
                                                 <td>{{ $post->id }}</td>
+                                                <td>
+                                                    @if($post->preview_image)
+                                                        <img src="{{ asset('storage/' . $post->preview_image) }}" alt="main_image" width="140" height="100">
+                                                    @else
+                                                        <strong>No image</strong>
+                                                    @endif
+                                                </td>
                                                 <td>{{ $post->title }}</td>
                                                 <td>{{ $post->content }}</td>
                                                 <td>{{ $post->category->title }}</td>

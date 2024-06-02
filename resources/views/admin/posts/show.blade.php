@@ -7,6 +7,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">{{ $post->title }}</h1>
+                    <img src="{{ asset('storage/' . $post->main_image) }}" alt="main_image" width="600" height="400">
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
