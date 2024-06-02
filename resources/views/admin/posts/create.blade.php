@@ -39,8 +39,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="title">Категория</label>
-                                <select class="custom-select" name="category_id">
+                                <label for="category">Категория</label>
+                                <select class="custom-select" id="category" name="category_id">
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">
                                             {{ $category->title }}
