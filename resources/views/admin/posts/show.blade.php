@@ -56,14 +56,14 @@
                                             <td>{{ $post->content }}</td>
                                             <td>{{ \Carbon\Carbon::parse($post->created_at)->toDateString() }}</td>
                                             <td>
-                                                <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-success w-25 mb-1">
+                                                <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-success w-50 mb-1">
                                                     Edit
                                                 </a>
 
                                                 <form action="{{ route('admin.posts.delete', $post) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <input type="submit" value="Delete" class="btn btn-danger w-25">
+                                                    <input type="submit" value="Delete" class="btn btn-danger w-50">
                                                 </form>
                                             </td>
                                         </tr>

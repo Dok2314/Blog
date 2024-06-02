@@ -25,7 +25,7 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-12">
-                    <form action="{{ route('admin.posts.update', $post) }}" class="col-4" method="POST">
+                    <form action="{{ route('admin.posts.update', $post) }}" class="col-12" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
@@ -56,12 +56,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="title">Контент</label>
-                                <textarea type="text" class="form-control" id="content" placeholder="Контент..." name="content">{{ $post->content }}</textarea>
+                                <label for="summernote">Контент</label>
+                                <textarea id="summernote" name="content">{{ $post->content }}</textarea>
                                 @error('content')
-                                <div class="text-danger">
-                                    {{ $message }}
-                                </div>
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
 
