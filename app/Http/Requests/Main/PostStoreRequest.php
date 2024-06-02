@@ -27,7 +27,8 @@ class PostStoreRequest extends FormRequest
             'content' => ['required', 'min:3'],
             'preview_image' => ['nullable', 'file'],
             'main_image' => ['nullable', 'file'],
-            'category_id' => ['required', 'exists:categories,id', 'integer']
+            'category_id' => ['required', 'exists:categories,id', 'integer'],
+            'tags' => ['required', 'array']
         ];
     }
 }

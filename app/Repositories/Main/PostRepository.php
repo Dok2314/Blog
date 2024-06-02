@@ -14,12 +14,14 @@ class PostRepository
 
     public function createPost(PostDTO $postDTO): void
     {
-        Post::create($postDTO->toArray());
+        $post = Post::create($postDTO->toArray());
+        $post->tags()->attach($postDTO->getTags());
     }
 
     public function updatePost($post, PostDTO $postDTO): void
     {
         $post->update($postDTO->toArray());
+        $post->tags()->sync($postDTO->getTags());
     }
 
     public function getDeletedPosts()

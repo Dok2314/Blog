@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Main;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePostRequest extends FormRequest
@@ -17,14 +18,15 @@ class UpdatePostRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
             'title' => ['required'],
             'content' => ['required', 'min:3'],
-            'category_id' => ['required', 'exists:categories,id', 'integer']
+            'category_id' => ['required', 'exists:categories,id', 'integer'],
+            'tags' => ['required', 'array']
         ];
     }
 }

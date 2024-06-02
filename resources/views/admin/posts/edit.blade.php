@@ -56,6 +56,61 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Теги</label>
+                                <div class="select2-purple">
+                                    <select class="select2" name="tags[]" multiple="multiple" data-placeholder="Выберите теги" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                        @foreach($tags as $tag)
+                                            <option value="{{ $tag->id }}" {{ $post->tags->contains($tag) ? 'selected' : '' }}>{{ $tag->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('tags')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="preview_image">Изображение поста (preview)</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="preview_image" name="preview_image">
+                                        <label class="custom-file-label" for="preview_image">Выберите файл</label>
+                                    </div>
+                                </div>
+                                @if ($post->preview_image)
+                                    <div class="mt-2">
+                                        <img src="{{ asset('storage/' . $post->preview_image) }}" alt="preview_image" style="max-width: 200px; max-height: 200px;">
+                                    </div>
+                                @endif
+                                @error('preview_image')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="main_image">Изображение поста (main)</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="main_image" name="main_image">
+                                    <label class="custom-file-label" for="main_image">Выберите файл</label>
+                                </div>
+                                @if ($post->main_image)
+                                    <div class="mt-2">
+                                        <img src="{{ asset('storage/' . $post->main_image) }}" alt="main_image" style="max-width: 200px; max-height: 200px;">
+                                    </div>
+                                @endif
+                                @error('main_image')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+
+                            <div class="form-group">
                                 <label for="summernote">Контент</label>
                                 <textarea id="summernote" name="content">{{ $post->content }}</textarea>
                                 @error('content')

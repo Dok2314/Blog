@@ -11,6 +11,7 @@ class PostDTO
     private $previewImage;
     private $mainImage;
     private int $categoryId;
+    private array $tags;
 
     public function __construct(array $params)
     {
@@ -19,11 +20,17 @@ class PostDTO
         $this->categoryId = $params['category_id'];
         $this->previewImage = $params['preview_image'] ?? null;
         $this->mainImage = $params['main_image'] ?? null;
+        $this->tags = $params['tags'] ?? [];
     }
 
     public function setTitle(string $title): void
     {
         $this->title = $title;
+    }
+
+    public function setTags(array $tags): void
+    {
+        $this->tags = $tags;
     }
 
     public function setContent(string $content): void
@@ -49,6 +56,11 @@ class PostDTO
     public function getTitle(): string
     {
         return $this->title;
+    }
+
+    public function getTags(): array
+    {
+        return $this->tags;
     }
 
     public function getContent(): string

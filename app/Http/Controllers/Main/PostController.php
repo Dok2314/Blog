@@ -9,6 +9,7 @@ use App\Http\Requests\Main\UpdatePostRequest;
 use App\Models\Post;
 use App\Services\Main\CategoryService;
 use App\Services\Main\PostService;
+use App\Services\Main\TagService;
 use Exception;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,7 +17,8 @@ class PostController extends Controller
 {
     public function __construct(
         private readonly PostService $postService,
-        private readonly CategoryService $categoryService
+        private readonly CategoryService $categoryService,
+        private readonly TagService $tagService,
     ) {
     }
 
@@ -29,6 +31,7 @@ class PostController extends Controller
     public function create()
     {
         $categories = $this->categoryService->getCategories();
+        $tags = $this->tagService->getTags();
 
         if ($categories->isEmpty()) {
             return redirect()
@@ -36,7 +39,7 @@ class PostController extends Controller
                 ->with(['error' => 'Для начала создайте категорию!']);
         }
 
-        return view('admin.posts.create', compact('categories'));
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     public function store(PostStoreRequest $request)
@@ -61,7 +64,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = $this->categoryService->getCategories();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tags = $this->tagService->getTags();
+
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     public function update(Post $post, UpdatePostRequest $request)
