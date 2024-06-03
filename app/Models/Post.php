@@ -23,4 +23,14 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class,'post_tags', 'post_id', 'tag_id');
     }
+
+    public function getPreviewImage(): ?string
+    {
+        return $this->preview_image;
+    }
+
+    public function getMainImage(): ?string
+    {
+        return $this->main_image;
+    }
 }

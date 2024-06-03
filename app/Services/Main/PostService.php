@@ -37,6 +37,7 @@ class PostService
 
     public function update(Post $post, PostDTO $postDTO)
     {
+        $this->imageService->updateImages($post, $postDTO);
         $this->postRepository->updatePost($post, $postDTO);
     }
 

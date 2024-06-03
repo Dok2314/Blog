@@ -26,7 +26,9 @@ class UpdatePostRequest extends FormRequest
             'title' => ['required'],
             'content' => ['required', 'min:3'],
             'category_id' => ['required', 'exists:categories,id', 'integer'],
-            'tags' => ['required', 'array']
+            'preview_image' => ['nullable', 'file'],
+            'main_image' => ['nullable', 'file'],
+            'tags' => ['nullable', 'array']
         ];
     }
 }

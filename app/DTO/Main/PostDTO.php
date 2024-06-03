@@ -11,7 +11,7 @@ class PostDTO
     private $previewImage;
     private $mainImage;
     private int $categoryId;
-    private array $tags;
+    private ?array $tags;
 
     public function __construct(array $params)
     {
@@ -58,7 +58,7 @@ class PostDTO
         return $this->title;
     }
 
-    public function getTags(): array
+    public function getTags(): ?array
     {
         return $this->tags;
     }

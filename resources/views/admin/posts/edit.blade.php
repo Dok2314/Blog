@@ -25,7 +25,7 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-12">
-                    <form action="{{ route('admin.posts.update', $post) }}" class="col-12" method="POST">
+                    <form action="{{ route('admin.posts.update', $post) }}" class="col-12" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card-body">

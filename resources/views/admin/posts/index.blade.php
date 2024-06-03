@@ -71,7 +71,7 @@
                                                 <td>{{ $post->id }}</td>
                                                 <td>
                                                     @if($post->preview_image)
-                                                        <img src="{{ asset('storage/' . $post->preview_image) }}" alt="main_image" width="140" height="100">
+                                                        <img src="{{ asset('storage/' . $post->preview_image) }}" alt="preview_image" width="140" height="100">
                                                     @else
                                                         <strong>No image</strong>
                                                     @endif
