@@ -44,4 +44,9 @@ class TagService
     {
         $this->tagRepository->restoreTag($tagId);
     }
+
+    public function getPaginatedTags(int $perPage)
+    {
+        return $this->tagRepository->getPaginatedTags($perPage);
+    }
 }

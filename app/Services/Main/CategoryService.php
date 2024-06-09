@@ -41,4 +41,9 @@ class CategoryService
     {
         $this->categoryRepository->restoreCategory($categoryId);
     }
+
+    public function getPaginatedCategories(int $perPage)
+    {
+        return $this->categoryRepository->getPaginatedCategories($perPage);
+    }
 }

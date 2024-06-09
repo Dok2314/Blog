@@ -11,6 +11,7 @@ use App\Services\Main\CategoryService;
 use App\Services\Main\PostService;
 use App\Services\Main\TagService;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -22,9 +23,10 @@ class PostController extends Controller
     ) {
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $posts = $this->postService->getPosts();
+        $perPage = $request->query('perPage', 10);
+        $posts = $this->postService->getPaginatedPosts($perPage);
         return view('admin.posts.index', compact('posts'));
     }
 

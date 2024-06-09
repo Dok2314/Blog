@@ -38,4 +38,9 @@ class PostRepository
     {
         Post::withTrashed()->find($postId)->restore();
     }
+
+    public function getPaginatedPosts(int $perPage = 10)
+    {
+        return Post::paginate($perPage);
+    }
 }

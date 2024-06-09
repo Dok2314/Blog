@@ -36,4 +36,9 @@ class TagRepository
     {
         Tag::withTrashed()->find($tagId)->restore();
     }
+
+    public function getPaginatedTags(int $perPage)
+    {
+        return Tag::paginate($perPage);
+    }
 }

@@ -36,4 +36,9 @@ class CategoryRepository
     {
         Category::withTrashed()->find($categoryId)->restore();
     }
+
+    public function getPaginatedCategories(int $perPage)
+    {
+        return Category::paginate($perPage);
+    }
 }

@@ -50,6 +50,22 @@
 {{--                                            </div>--}}
 {{--                                        </div>--}}
 {{--                                    </div>--}}
+
+                                    <div class="card-tools">
+                                        <label for="postsPerPage"></label>
+                                        <div class="input-group input-group-sm" style="width: 175px;">
+                                            <form id="perPageForm" method="GET" action="{{ route('admin.posts.index') }}" class="mb-3">
+                                                <label for="postsPerPage">Категорий на страницу:</label>
+                                                <div class="input-group input-group-sm" style="width: 175px;">
+                                                    <select name="perPage" id="postsPerPage" class="form-control" onchange="document.getElementById('perPageForm').submit();">
+                                                        <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
+                                                        <option value="100" {{ request('perPage') == 100 ? 'selected' : '' }}>100</option>
+                                                        <option value="200" {{ request('perPage') == 200 ? 'selected' : '' }}>200</option>
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body table-responsive p-0">
@@ -82,6 +98,11 @@
                                     </table>
                                 </div>
                                 <!-- /.card-body -->
+                            </div>
+
+
+                            <div class="d-flex justify-content-center">
+                                {{ $categories->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
                             </div>
                             <!-- /.card -->
                         </div>

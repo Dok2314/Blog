@@ -9,6 +9,7 @@ use App\Http\Requests\Main\TagUpdateRequest;
 use App\Models\Tag;
 use App\Services\Main\TagService;
 use Exception;
+use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
@@ -16,9 +17,10 @@ class TagController extends Controller
     {
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $tags = $this->tagService->getTags();
+        $perPage = $request->query('perPage', 10);
+        $tags = $this->tagService->getPaginatedTags($perPage);
         return view('admin.tags.index', compact('tags'));
     }
 

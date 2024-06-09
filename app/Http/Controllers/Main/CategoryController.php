@@ -9,6 +9,7 @@ use App\Http\Requests\Main\CategoryUpdateRequest;
 use App\Models\Category;
 use App\Services\Main\CategoryService;
 use Exception;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -16,9 +17,10 @@ class CategoryController extends Controller
     {
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $categories = $this->categoryService->getCategories();
+        $perPage = $request->query('perPage', 10);
+        $categories = $this->categoryService->getPaginatedCategories($perPage);
         return view('admin.categories.index', compact('categories'));
     }
 

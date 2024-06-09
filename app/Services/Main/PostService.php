@@ -55,4 +55,9 @@ class PostService
     {
         $this->postRepository->restorePost($postId);
     }
+
+    public function getPaginatedPosts(int $perPage = 10)
+    {
+        return $this->postRepository->getPaginatedPosts($perPage);
+    }
 }
