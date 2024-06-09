@@ -85,9 +85,9 @@
                                     </div>
                                 @endif
                                 @error('preview_image')
-                                    <div class="text-danger">
-                                        {{ $message }}
-                                    </div>
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
                                 @enderror
                             </div>
 
@@ -103,9 +103,9 @@
                                     </div>
                                 @endif
                                 @error('main_image')
-                                    <div class="text-danger">
-                                        {{ $message }}
-                                    </div>
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
                                 @enderror
                             </div>
 
