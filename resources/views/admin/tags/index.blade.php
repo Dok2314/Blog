@@ -100,7 +100,7 @@
                             </div>
 
                             <div class="d-flex justify-content-center">
-                                {{ $tags->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
+                                {{ $tags->appends(request()->query())->links('vendor.pagination.bootstrap-4') }}
                             </div>
                             <!-- /.card -->
                         </div>

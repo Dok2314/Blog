@@ -112,7 +112,7 @@
                             </div>
 
                             <div class="d-flex justify-content-center">
-                                {{ $posts->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
+                                {{ $posts->appends(request()->query())->links('vendor.pagination.bootstrap-4') }}
                             </div>
                             <!-- /.card -->
                         </div>
