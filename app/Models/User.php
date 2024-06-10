@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const ROLE_ADMIN = 1;
+    const ROLE_DEVELOPER = 2;
+    const ROLE_REGULAR_USER = 3;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -43,4 +47,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function isAdmin(): bool
+    {
+        return $this->role_id === self::ROLE_ADMIN;
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

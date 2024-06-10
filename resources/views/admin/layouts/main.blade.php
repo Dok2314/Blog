@@ -47,6 +47,18 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
         </ul>
+
+        @if(\Illuminate\Support\Facades\Auth::user())
+            <ul class="navbar-nav ml-auto">
+                <!-- Navbar Search -->
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-dark">Выйти</button>
+                    </form>
+                </li>
+            </ul>
+        @endif
     </nav>
     <!-- /.navbar -->
 
@@ -135,5 +147,8 @@
 
     $('.select2').select2()
 </script>
+
+<!-- Секция скриптов -->
+@stack('scripts')
 </body>
 </html>
