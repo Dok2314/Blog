@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Редактирование Поста</h1>
+                    <h1 class="m-0">Редактирование Пользователя `{{ $user->name }}`</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -25,14 +25,14 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-12">
-                    <form action="{{ route('admin.posts.update', $post) }}" class="col-12" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.users.update', $user) }}" class="col-12" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="title">Название</label>
-                                <input type="text" class="form-control" id="title" placeholder="Название поста..." name="title" value="{{ $post->title }}">
-                                @error('title')
+                                <label for="name">Имя</label>
+                                <input type="text" class="form-control" id="name" placeholder="Имя" name="name" value="{{ $user->name ? $user->name : old('name') }}">
+                                @error('name')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
@@ -40,15 +40,23 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="category">Категория</label>
-                                <select class="custom-select" id="category" name="category_id">
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}" {{ $category->posts->contains($post->id) ? 'selected' : '' }}>
-                                            {{ $category->title }}
-                                        </option>
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="{{ $user->email ? $user->email : old('email') }}">
+                                @error('email')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="role_id">Роль</label>
+                                <select name="role_id" id="role_id" class="form-control">
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}" {{ $role->users->contains($user) ? 'selected' : '' }}>{{ $role->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('category_id')
+                                @error('role_id')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
@@ -56,35 +64,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Теги</label>
-                                <div class="select2-purple">
-                                    <select class="select2" name="tags[]" multiple="multiple" data-placeholder="Выберите теги" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                        @foreach($tags as $tag)
-                                            <option value="{{ $tag->id }}" {{ $post->tags->contains($tag) ? 'selected' : '' }}>{{ $tag->title }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                @error('tags')
-                                <div class="text-danger">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="preview_image">Изображение поста (preview)</label>
+                                <label for="password">Пароль</label>
                                 <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="preview_image" name="preview_image">
-                                        <label class="custom-file-label" for="preview_image">Выберите файл</label>
+                                    <input type="password" class="form-control" id="password" placeholder="Password" name="password" value="{{ old('password') }}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary toggle-password" type="button"><i class="fas fa-eye"></i></button>
                                     </div>
                                 </div>
-                                @if ($post->preview_image)
-                                    <div class="mt-2">
-                                        <img src="{{ asset('storage/' . $post->preview_image) }}" alt="preview_image" style="max-width: 200px; max-height: 200px;">
-                                    </div>
-                                @endif
-                                @error('preview_image')
+                                @error('password')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
@@ -92,31 +79,17 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="main_image">Изображение поста (main)</label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="main_image" name="main_image">
-                                    <label class="custom-file-label" for="main_image">Выберите файл</label>
-                                </div>
-                                @if ($post->main_image)
-                                    <div class="mt-2">
-                                        <img src="{{ asset('storage/' . $post->main_image) }}" alt="main_image" style="max-width: 200px; max-height: 200px;">
+                                <label for="password_confirmation">Повторите пароль</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password_confirmation" placeholder="Password confirm" name="password_confirmation" value="{{ old('password_confirmation') }}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary toggle-password" type="button"><i class="fas fa-eye"></i></button>
                                     </div>
-                                @endif
-                                @error('main_image')
+                                </div>
+                                @error('password_confirmation')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
-                                @enderror
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="summernote">Контент</label>
-                                <textarea id="summernote" name="content">{{ $post->content }}</textarea>
-                                @error('content')
-                                    <div class="text-danger">
-                                        {{ $message }}
-                                    </div>
                                 @enderror
                             </div>
 

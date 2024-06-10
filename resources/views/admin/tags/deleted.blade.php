@@ -59,6 +59,7 @@
                                             <th>ID</th>
                                             <th>Название</th>
                                             <th>Дата создания</th>
+                                            <th>Дата удаления</th>
                                             <th>Действие</th>
                                         </tr>
                                         </thead>
@@ -68,6 +69,7 @@
                                                 <td>{{ $tag->id }}</td>
                                                 <td>{{ $tag->title }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($tag->created_at)->toDateString() }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($tag->deleted_at)->toDateString() }}</td>
                                                 <td>
 {{--                                                    <a href="{{ route('admin.categories.show', $category) }}">--}}
 {{--                                                        <i class="far fa-eye"></i>--}}

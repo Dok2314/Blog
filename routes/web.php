@@ -24,7 +24,7 @@ Route::group([], function () {
     Route::get('/', [BlogController::class, 'index']);
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/', [AdminController::class, 'index']);
 
     Route::group(['prefix' => 'categories'], function () {

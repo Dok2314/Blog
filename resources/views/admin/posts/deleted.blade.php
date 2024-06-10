@@ -61,6 +61,7 @@
                                             <th>Контент</th>
                                             <th>Категория</th>
                                             <th>Дата создания</th>
+                                            <th>Дата удаления</th>
                                             <th>Действие</th>
                                         </tr>
                                         </thead>
@@ -72,6 +73,7 @@
                                                 <td>{{ $post->content }}</td>
                                                 <td>{{ $post->category->title }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($post->created_at)->toDateString() }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($post->deleted_at)->toDateString() }}</td>
                                                 <td>
                                                     <form action="{{ route('admin.posts.restore', $post) }}" method="POST">
                                                         @csrf

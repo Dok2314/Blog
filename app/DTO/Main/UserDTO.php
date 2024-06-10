@@ -6,14 +6,14 @@ class UserDTO
 {
     private string $name;
     private string $email;
-    private string $password;
+    private ?string $password;
     private int $roleId;
 
     public function __construct(array $params)
     {
         $this->name = $params['name'];
         $this->email = $params['email'];
-        $this->password = $params['password'];
+        $this->password = $params['password'] ?? null;
         $this->roleId = $params['role_id'];
     }
 
@@ -27,7 +27,7 @@ class UserDTO
         $this->email = $email;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
