@@ -8,6 +8,8 @@ use App\Http\Controllers\Main\CategoryController;
 use App\Http\Controllers\Main\TagController;
 use App\Http\Controllers\Main\PostController;
 use App\Http\Controllers\Main\UserController;
+use App\Http\Controllers\Main\RoleController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,8 +104,27 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
             Route::post('/', [UserController::class, 'restore'])->name('admin.users.restore');
         });
     });
+
+    Route::group(['prefix' => 'roles'], function () {
+        Route::get('/index', [RoleController::class, 'index'])->name('admin.roles.index');
+        Route::get('/deleted/roles', [RoleController::class, 'listOfDeletedRoles'])->name('admin.roles.deleted');
+        Route::get('/create', [RoleController::class, 'create'])->name('admin.roles.create');
+
+        Route::post('/', [RoleController::class, 'store'])->name('admin.roles.store');
+
+        Route::group(['prefix' => '{role}'], function () {
+            Route::get('/', [RoleController::class, 'show'])->name('admin.roles.show');
+            Route::get('/edit', [RoleController::class, 'edit'])->name('admin.roles.edit');
+
+            Route::put('/', [RoleController::class, 'update'])->name('admin.roles.update');
+
+            Route::delete('/', [RoleController::class, 'delete'])->name('admin.roles.delete');
+
+            Route::post('/', [RoleController::class, 'restore'])->name('admin.roles.restore');
+        });
+    });
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');

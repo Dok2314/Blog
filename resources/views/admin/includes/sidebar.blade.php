@@ -48,6 +48,15 @@
                     </p>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a href="{{ route('admin.roles.index') }}" class="nav-link">
+                    <i class="nav-icon far fa-image"></i>
+                    <p>
+                        Роли
+                    </p>
+                </a>
+            </li>
         </ul>
     </div>
     <!-- /.sidebar -->
