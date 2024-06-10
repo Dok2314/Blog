@@ -51,4 +51,14 @@ class RoleRepository
     {
         Role::create($roleDTO->toArray());
     }
+
+    public function massDelete(array $ids): void
+    {
+        Role::whereIn('id', $ids)->delete();
+    }
+
+    public function massRestore(array $ids): void
+    {
+        Role::withTrashed()->whereIn('id', $ids)->restore();
+    }
 }

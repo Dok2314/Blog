@@ -49,4 +49,14 @@ class RoleService
     {
         $this->roleRepository->store($roleDTO);
     }
+
+    public function massDelete(array $ids): void
+    {
+        $this->roleRepository->massDelete($ids);
+    }
+
+    public function massRestore(array $ids): void
+    {
+        $this->roleRepository->massRestore($ids);
+    }
 }

@@ -69,33 +69,43 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body table-responsive p-0">
-                                    <table class="table table-hover text-nowrap">
-                                        <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Название</th>
-                                            <th>Дата создания</th>
-                                            <th>Действие</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($roles as $role)
+                                    <form id="massDeleteForm" method="POST" action="{{ route('admin.roles.massDelete') }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <table class="table table-hover text-nowrap">
+                                            <thead>
                                             <tr>
-                                                <td>{{ $role->id }}</td>
-                                                <td>{{ $role->name }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($role->created_at)->toDateString() }}</td>
-                                                <td>
-                                                    <a href="{{ route('admin.roles.show', $role) }}">
-                                                        <i class="far fa-eye"></i>
-                                                    </a>
-                                                    <a href="{{ route('admin.roles.edit', $role) }}" class="text-success">
-                                                        edit
-                                                    </a>
-                                                </td>
+                                                <th>
+                                                    <input type="checkbox" id="select-all">
+                                                    <label for="select-all">Выбрать все</label>
+                                                </th>
+                                                <th>ID</th>
+                                                <th>Название</th>
+                                                <th>Дата создания</th>
+                                                <th>Действие</th>
                                             </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($roles as $role)
+                                                <tr>
+                                                    <td><input type="checkbox" name="ids[]" value="{{ $role->id }}"></td>
+                                                    <td>{{ $role->id }}</td>
+                                                    <td>{{ $role->name }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($role->created_at)->toDateString() }}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin.roles.show', $role) }}">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                        <a href="{{ route('admin.roles.edit', $role) }}" class="text-success">
+                                                            edit
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                        <button type="submit" class="btn btn-danger mt-2">Удалить выбранные</button>
+                                    </form>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -113,3 +123,14 @@
         </div><!-- /.container-fluid -->
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        document.getElementById('select-all').onclick = function() {
+            var checkboxes = document.getElementsByName('ids[]');
+            for (var checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+            }
+        }
+    </script>
+@endpush

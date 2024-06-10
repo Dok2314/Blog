@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Main;
 
 use App\DTO\Main\RoleDTO;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Main\MassRoleDeleteRequest;
+use App\Http\Requests\Main\MassRoleRestoreRequest;
 use App\Http\Requests\Main\RoleStoreRequest;
 use App\Http\Requests\Main\RoleUpdateRequest;
 use App\Models\Role;
@@ -97,5 +99,19 @@ class RoleController extends Controller
         $perPage = $request->query('perPage', 10);
         $roles = $this->roleService->getDeletedPaginatedRoles($perPage);
         return view('admin.roles.deleted', compact('roles'));
+    }
+
+    public function massDelete(MassRoleDeleteRequest $request)
+    {
+        try {
+            $ids = $request->get('ids');
+            $this->roleService->massDelete($ids);
+
+            return redirect()
+                ->route('admin.roles.index')
+                ->with(['success' => 'Роли успешно удалены!']);
+        } catch (Exception $exception) {
+            return $exception->getMessage();
+        }
     }
 }
