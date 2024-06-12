@@ -51,6 +51,12 @@
         @if(\Illuminate\Support\Facades\Auth::user())
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
+                <li class="nav-item mr-2">
+                    <a href="{{ route('main.page') }}" class="btn btn-primary">
+                        Главная
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf

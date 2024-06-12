@@ -51,9 +51,24 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#"><span class="flag-icon flag-icon-squared rounded-circle flag-icon-gb"></span> Eng</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Download</a>
-                    </li>
+                    @if(\Illuminate\Support\Facades\Auth::user())
+                        <li class="nav-item mr-2">
+                            <a class="nav-link btn-success" href="{{ route('admin.index') }}" style="height: 36px">Admin Panel</a>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="nav-link btn-warning">Выйти</button>
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item mr-2">
+                            <a class="nav-link btn-info" href="{{ route('login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn-success" href="{{ route('register') }}">Register</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </nav>

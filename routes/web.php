@@ -23,11 +23,11 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::group([], function () {
-    Route::get('/', [BlogController::class, 'index']);
+    Route::get('/', [BlogController::class, 'index'])->name('main.page');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
-    Route::get('/', [AdminController::class, 'index']);
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/index', [CategoryController::class, 'index'])->name('admin.categories.index');
