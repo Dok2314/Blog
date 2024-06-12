@@ -127,8 +127,8 @@
 @push('scripts')
     <script>
         document.getElementById('select-all').onclick = function() {
-            var checkboxes = document.getElementsByName('ids[]');
-            for (var checkbox of checkboxes) {
+            let checkboxes = document.getElementsByName('ids[]');
+            for (let checkbox of checkboxes) {
                 checkbox.checked = this.checked;
             }
         }

@@ -113,7 +113,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::post('/', [RoleController::class, 'store'])->name('admin.roles.store');
 
         Route::delete('mass-delete', [RoleController::class, 'massDelete'])->name('admin.roles.massDelete');
-//        Route::delete('mass-restore', [RoleController::class, 'massRestore'])->name('admin.roles.massRestore');
+        Route::post('mass-restore', [RoleController::class, 'massRestore'])->name('admin.roles.massRestore');
 
         Route::group(['prefix' => '{role}'], function () {
             Route::get('/', [RoleController::class, 'show'])->name('admin.roles.show');

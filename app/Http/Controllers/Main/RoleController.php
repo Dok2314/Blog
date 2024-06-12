@@ -114,4 +114,18 @@ class RoleController extends Controller
             return $exception->getMessage();
         }
     }
+
+    public function massRestore(MassRoleRestoreRequest $request)
+    {
+        try {
+            $ids = $request->get('ids');
+            $this->roleService->massRestore($ids);
+
+            return redirect()
+                ->route('admin.roles.index')
+                ->with(['success' => 'Роли успешно восстановлены!']);
+        } catch (Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
 }
